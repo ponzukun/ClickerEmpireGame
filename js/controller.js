@@ -4,14 +4,14 @@ import { itemObjects } from "/js/config.js";
 
 export class Controller {
     static startGame() {
-        // console.log(1);
         // loginページの表示
         document.getElementById("login-page").append(View.createLoginPage());
         // loginページからuserを取得
-        document.getElementById("login-btn").addEventListener("click", () => {
-            window.alert("login!!");
+        document.getElementById("sign-up-btn").addEventListener("click", () => {
+            let user = new User(document.getElementById("user-name").value);
+
+            document.getElementById("login-page").innerHTML = "";
+            document.getElementById("main-page").append(View.createMainPage(user));
         });
-        // itemlistの表示
-        // View.displayItemsList(config.assetList, itemObjects, new User("ponzukun"));
     }
 }
