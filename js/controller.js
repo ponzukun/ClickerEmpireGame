@@ -12,6 +12,14 @@ export class Controller {
 
             document.getElementById("login-page").innerHTML = "";
             document.getElementById("main-page").append(View.createMainPage(user));
+            Controller.advanceGame(user);
         });
+    }
+
+    static advanceGame(user) {
+        setInterval(function(){
+            user.spentDays++;
+            document.getElementById("spent-days").innerHTML = `${user.spentDays} days`;
+        },1000)
     }
 }

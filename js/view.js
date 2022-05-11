@@ -77,7 +77,7 @@ export class View {
                             <div class="border my-1 ml-1 col-6 rem1">${user.age} years old</div>
                         </div>
                         <div class="d-flex justify-content-between col-12">
-                            <div class="border my-1 mr-1 col-6 rem1">1 days</div>
+                            <div id="spent-days" class="border my-1 mr-1 col-6 rem1">${user.spentDays} days</div>
                             <div class="border my-1 ml-1 col-6 rem1">￥ ${user.haveMoney}</div>
                         </div>
                     </div>
