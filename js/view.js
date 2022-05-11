@@ -7,7 +7,7 @@ export class View {
 
         itemObjects.forEach(item => {
             itemCon.innerHTML += `
-                <div class="border-dark bg-success d-flex py-2 mb-2">
+                <div class="border-dark bg-success d-flex py-2 mb-2 hover">
                     <div class="col-7 col-md-5 col-lg-4">
                         <img class="col-12" src="${item.imageUrl}">
                     </div>
@@ -61,7 +61,7 @@ export class View {
                         <p class="rem1p5">0 Burgers</p>
                         <p class="rem1p5">one click ￥25</p>
                     </div>
-                    <i class="fa-10x fas fa-hamburger"></i>
+                    <i class="fa-10x fas fa-hamburger hover"></i>
                 </div>
                 <div class="ml-2 col-8">
                     <div class="bg-primary py-2">
@@ -76,10 +76,10 @@ export class View {
                     </div>
                     <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight"></div>
                     <div class="d-flex justify-content-end mt-2">
-                        <div class="border border-dark p-2 mr-3">
+                        <div class="border border-dark p-2 mr-3 hover">
                             <i class="text-dark fa-3x fas fa-undo"></i>
                         </div>
-                        <div class="border border-dark p-2">
+                        <div class="border border-dark p-2 hover">
                             <i class="text-dark fa-3x fas fa-save"></i>
                         </div>
                     </div>
