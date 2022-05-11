@@ -1,38 +1,31 @@
+import { itemObjects } from "/js/config.js";
+
 export class View {
-    static displayItemsList(target, itemObjList, user) {
-        // Viewの処理
-        itemObjList.forEach(itemObj => {
-            console.log(itemObj);
-            let asset = document.createElement("div");
-            asset.classList.add("bg-dark", "px-2", "pt-2");
-            asset.innerHTML += `
-                <div class="border-dark bg-success d-flex py-2">
+    static createItemList() {
+        let itemCon = document.createElement("div");
+        itemCon.classList.add("bg-dark", "px-2", "pt-2");
+
+        itemObjects.forEach(item => {
+            itemCon.innerHTML += `
+                <div class="border-dark bg-success d-flex py-2 mb-2">
                     <div class="col-7 col-md-5 col-lg-4">
-                        <img class="col-12" src="${itemObj.imageUrl}">
+                        <img class="col-12" src="${item.imageUrl}">
                     </div>
                     <div class="col-2 col-md-4 col-lg-5 d-flex flex-column justify-content-center">
-                        <p class="rem1p5">${itemObj.name}</p>
-                        <p class="rem1p5">￥ ${itemObj.price}</p>
+                        <p class="rem1p5">${item.name}</p>
+                        <p class="rem1p5">￥ ${this.numberWithCommas(item.price)}</p>
                     </div>
                     <div class="col-3 d-flex flex-column justify-content-center">
-                        <h3 class="pt-3">${user.getItemCount(itemObj.name)}</h3>
-                        <p class="text-danger">￥${user.getItemEffect(itemObj)}</p>
+                        <h3 class="pt-3">0</h3>
+                        <p class="text-danger">￥0</p>
                     </div>
                 </div>
             `;
-    
-            target.append(asset);
-    
-            // addeventlisterで購入画面表示
-
         });
+        return itemCon;
     }
 
-    static displayUserInfo() {
-        console.log(0);
-    }
-
-    static createLoginPage() {
+    static createEntrancePage() {
         let loginCon = document.createElement("div");
         loginCon.classList.add("vh-100", "d-flex", "justify-content-center", "align-items-center", "bg-dark");
         loginCon.innerHTML = `
@@ -74,15 +67,14 @@ export class View {
                     <div class="bg-primary py-2">
                         <div class="d-flex justify-content-between col-12">
                             <div class="border my-1 mr-1 col-6 rem1">${user.name}</div>
-                            <div class="border my-1 ml-1 col-6 rem1">${user.age} years old</div>
+                            <div id="user-age" class="border my-1 ml-1 col-6 rem1">${user.age} years old</div>
                         </div>
                         <div class="d-flex justify-content-between col-12">
                             <div id="spent-days" class="border my-1 mr-1 col-6 rem1">${user.spentDays} days</div>
-                            <div class="border my-1 ml-1 col-6 rem1">￥ ${user.haveMoney}</div>
+                            <div class="border my-1 ml-1 col-6 rem1">￥ ${this.numberWithCommas(user.haveMoney)}</div>
                         </div>
                     </div>
-                    <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight">
-                    </div>
+                    <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight"></div>
                     <div class="d-flex justify-content-end mt-2">
                         <div class="border border-dark p-2 mr-3">
                             <i class="text-dark fa-3x fas fa-undo"></i>
@@ -94,6 +86,11 @@ export class View {
                 </div>
             </div>
         `;
+        mainCon.querySelectorAll("#asset-list").item(0).append(this.createItemList());
         return mainCon;
+    }
+
+    static numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 }
