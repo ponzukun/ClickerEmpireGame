@@ -1,34 +1,96 @@
 import { itemObjects } from "/js/config.js";
 
 export class View {
+    // アイテムリストの画面を作成
     static createItemList() {
-        let itemCon = document.createElement("div");
-        itemCon.classList.add("bg-dark", "px-2", "pt-2");
+        let itemListCon = document.createElement("div");
+        itemListCon.classList.add("px-2", "pt-2");
 
         itemObjects.forEach(item => {
-            itemCon.innerHTML += `
-                <div class="border-dark bg-success d-flex py-2 mb-2 hover">
-                    <div class="col-7 col-md-5 col-lg-4">
-                        <img class="col-12" src="${item.imageUrl}">
+            let itemCon = document.createElement("div");
+            itemCon.classList.add("border-dark", "bg-success", "d-flex", "py-2", "mb-2", "hover");
+            itemCon.innerHTML = `
+                    <div class="col-4">
+                        <img class="img-item" src="${item.imageUrl}">
                     </div>
-                    <div class="col-2 col-md-4 col-lg-5 d-flex flex-column justify-content-center">
+                    <div class="col-6 d-flex flex-column justify-content-center">
                         <p class="rem1p5">${item.name}</p>
                         <p class="rem1p5">￥ ${this.numberWithCommas(item.price)}</p>
                     </div>
-                    <div class="col-3 d-flex flex-column justify-content-center">
+                    <div class="col-2 d-flex flex-column justify-content-center">
                         <h3 class="pt-3">0</h3>
                         <p class="text-danger">￥0</p>
                     </div>
-                </div>
             `;
+            // アイテムの購入画面に遷移
+            itemCon.addEventListener("click", () => {
+                document.getElementById("asset-list").innerHTML = "";
+                document.getElementById("asset-list").append(this.createItemDetail(item));
+
+                // 戻る
+                document.getElementById("back-btn").addEventListener("click", () => {
+                    document.getElementById("asset-list").innerHTML = "";
+                    document.getElementById("asset-list").append(this.createItemList());    
+                });
+
+                // 購入→所持金より購入金額が下か判定→所持金から購入金額を引く→購入量を増やす
+            });
+            itemListCon.append(itemCon);
         });
-        return itemCon;
+        return itemListCon;
     }
 
+    // アイテムの詳細画面を作成
+    static createItemDetail(item) {
+        let itemDetailCon = document.createElement("div");
+        itemDetailCon.classList.add("px-2", "pt-2");
+        itemDetailCon.innerHTML = `
+            <div class="border-dark bg-success py-2">
+                <div class="d-flex mb-4">
+                    <div class="col-8">
+                        <div class="col-12">
+                            <h1 class="mb-2">${item.name}</h1>
+                            <div class="text-left mb-1 rem1p5">Max purchases: ${item.maxAmount}</div>
+                            <div class="text-left mb-3 rem1p5">Price: ￥${this.numberWithCommas(item.price)}</div>
+                            <div class="text-left rem1">${item.description}</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <img class="col-12" src="${item.imageUrl}">
+                    </div>
+                </div>
+                <div class="my-4">
+                    <h2>How many would you like to purchase?</h2>
+                    <div>
+                        <input id="amount-purchase" class="text-right col-11 px-1" type="number" min="1" value="1">
+                    </div>
+                    <div>
+                        <div id="total-price" class="col-12 rem1p5 text-right pr-4">Total: ￥${this.numberWithCommas(item.price)}</div>
+                    </div>
+                </div>
+                <div class="d-flex my-4">
+                    <div class="pl-2 col-6">
+                        <button id="back-btn" class="col-12 btn btn-secondary">Go Back</button>
+                    </div>
+                    <div class="pr-2 col-6">
+                        <button id="purchase-btn" class="col-12 btn btn-danger">Purchase</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        // 購入量を変更すると合計価格が変化
+        itemDetailCon.querySelector("#amount-purchase").addEventListener("input", (event) => {
+            let totalPrice = item.price * event.target.value;
+            itemDetailCon.querySelector("#total-price").innerHTML = `Total: ￥${this.numberWithCommas(totalPrice)}`;
+        });
+        return itemDetailCon;
+    }
+
+    // このゲームの入り口の画面を作成
     static createEntrancePage() {
-        let loginCon = document.createElement("div");
-        loginCon.classList.add("vh-100", "d-flex", "justify-content-center", "align-items-center", "bg-dark");
-        loginCon.innerHTML = `
+        let EntranceCon = document.createElement("div");
+        EntranceCon.classList.add("vh-100", "d-flex", "justify-content-center", "align-items-center", "bg-dark");
+        EntranceCon.innerHTML = `
             <div class="d-flex justify-content-center align-items-center col-md-7 col-10">
                 <div id="initial-form" class="d-block p-4 bg-white text-center d-flex justify-content-center">
                     <div id="login-form" class="col-12">
@@ -48,10 +110,13 @@ export class View {
                 </div>
             </div> 
         `;
-        return loginCon;
+        document.getElementById("entrance-page").append(EntranceCon);
     }
 
+    // このゲームのメイン画面を作成
     static createMainPage(user) {
+        document.getElementById("entrance-page").innerHTML = "";
+
         let mainCon = document.createElement("div");
         mainCon.classList.add("d-flex", "justify-content-center", "align-items-center", "bg-dark");
         mainCon.innerHTML = `
@@ -87,9 +152,10 @@ export class View {
             </div>
         `;
         mainCon.querySelectorAll("#asset-list").item(0).append(this.createItemList());
-        return mainCon;
+        document.getElementById("main-page").append(mainCon);
     }
 
+    // 数字にコンマを入れる
     static numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
