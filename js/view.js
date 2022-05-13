@@ -1,12 +1,10 @@
-import { itemObjects } from "/js/config.js";
-
 export class View {
     // アイテムリストの画面を作成
-    static createItemList() {
+    static createItemList(user) {
         let itemListCon = document.createElement("div");
         itemListCon.classList.add("px-2", "pt-2");
 
-        itemObjects.forEach(item => {
+        user.haveItems.forEach(item => {
             let itemCon = document.createElement("div");
             itemCon.classList.add("border-dark", "bg-success", "d-flex", "py-2", "mb-2", "hover");
             itemCon.innerHTML = `
@@ -18,8 +16,9 @@ export class View {
                         <p class="rem1p5">￥ ${this.numberWithCommas(item.price)}</p>
                     </div>
                     <div class="col-2 d-flex flex-column justify-content-center">
-                        <h3 class="pt-3">0</h3>
-                        <p class="text-danger">￥0</p>
+                        <h3 class="pt-3">${item.currentAmount}</h3>
+                        <div class="text-danger">+${item.effectToString()}</div>
+                        <div class="text-danger">/day</div>
                     </div>
             `;
             // アイテムの購入画面に遷移
@@ -30,10 +29,20 @@ export class View {
                 // 戻る
                 document.getElementById("back-btn").addEventListener("click", () => {
                     document.getElementById("asset-list").innerHTML = "";
-                    document.getElementById("asset-list").append(this.createItemList());    
+                    document.getElementById("asset-list").append(this.createItemList(user));    
                 });
 
                 // 購入→所持金より購入金額が下か判定→所持金から購入金額を引く→購入量を増やす
+                document.getElementById("purchase-btn").addEventListener("click", () => {
+                    let itemAmount = parseInt(document.getElementById("amount-purchase").value, 10);
+                    let totalPrice = item.price * itemAmount;
+                    if(totalPrice <= user.haveMoney) {
+                        user.buyItem(item, itemAmount);
+                        this.createMainPage(user);
+                    } else {
+                        window.alert("Too expensive for you!!");
+                    }
+                });
             });
             itemListCon.append(itemCon);
         });
@@ -116,6 +125,7 @@ export class View {
     // このゲームのメイン画面を作成
     static createMainPage(user) {
         document.getElementById("entrance-page").innerHTML = "";
+        document.getElementById("main-page").innerHTML = "";
 
         let mainCon = document.createElement("div");
         mainCon.classList.add("d-flex", "justify-content-center", "align-items-center", "bg-dark");
@@ -123,8 +133,8 @@ export class View {
             <div class="vh-88 d-block d-flex bg-white col-9 text-center text-white my-5 p-4">
                 <div class="bg-danger mr-2 col-4">
                     <div class="pt-2">
-                        <p class="rem1p5">0 Burgers</p>
-                        <p class="rem1p5">one click ￥25</p>
+                        <p class="rem1p5">${user.haveBurgers} Burgers</p>
+                        <p class="rem1p5">one click ￥${user.effectClick}</p>
                     </div>
                     <i class="fa-10x fas fa-hamburger hover"></i>
                 </div>
@@ -136,7 +146,7 @@ export class View {
                         </div>
                         <div class="d-flex justify-content-between col-12">
                             <div id="spent-days" class="border my-1 mr-1 col-6 rem1">${user.spentDays} days</div>
-                            <div class="border my-1 ml-1 col-6 rem1">￥ ${this.numberWithCommas(user.haveMoney)}</div>
+                            <div id="have-money" class="border my-1 ml-1 col-6 rem1">￥ ${this.numberWithCommas(user.haveMoney)}</div>
                         </div>
                     </div>
                     <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight"></div>
@@ -151,7 +161,7 @@ export class View {
                 </div>
             </div>
         `;
-        mainCon.querySelectorAll("#asset-list").item(0).append(this.createItemList());
+        mainCon.querySelectorAll("#asset-list").item(0).append(this.createItemList(user));
         document.getElementById("main-page").append(mainCon);
     }
 
