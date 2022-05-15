@@ -9,7 +9,7 @@ export class User {
         this.effectRealEstate = 0;
         this.effectFinancialProduct = 0;
         this.haveBurgers = 0;
-        this.haveMoney = 1000000000000000;
+        this.haveMoney = 50000;
         this.spentDays = 1;
         this.haveItems = items.map(item => 
             new Item(item.name, item.type, item.effect, item.maxAmount, 
@@ -43,5 +43,12 @@ export class User {
                 this.effectRealEstate += effect;
             }
         }
+    }
+
+    clickHamburger() {
+        this.haveMoney += this.effectClick;
+        console.log(this.haveMoney);
+        this.haveBurgers++;
+        console.log(this.haveBurgers);
     }
 }

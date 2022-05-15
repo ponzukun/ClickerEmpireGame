@@ -14,7 +14,15 @@ export class Controller {
     static createNewGame() {
         document.getElementById("sign-up-btn").addEventListener("click", () => {
             let user = new User(document.getElementById("user-name").value);
+
             View.createMainPage(user);
+            // ハンバーガークリック
+            document.getElementById("hamburger").addEventListener("click", () => {
+                user.clickHamburger();
+                document.getElementById("have-burgers").innerHTML = `${user.haveBurgers} Burgers`;
+                document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
+            });
+            
             this.advanceDate(user);
         });
     }

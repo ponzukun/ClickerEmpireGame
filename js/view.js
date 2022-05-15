@@ -133,10 +133,12 @@ export class View {
             <div class="vh-88 d-block d-flex bg-white col-9 text-center text-white my-5 p-4">
                 <div class="bg-danger mr-2 col-4">
                     <div class="pt-2">
-                        <p class="rem1p5">${user.haveBurgers} Burgers</p>
+                        <p id="have-burgers" class="rem1p5">${user.haveBurgers} Burgers</p>
                         <p class="rem1p5">one click ￥${user.effectClick}</p>
                     </div>
-                    <i class="fa-10x fas fa-hamburger hover"></i>
+                    <div id="hamburger">
+                        <img class="img-item hover" src="/images/Hamburger.png">
+                    </div>
                 </div>
                 <div class="ml-2 col-8">
                     <div class="bg-primary py-2">
@@ -161,7 +163,9 @@ export class View {
                 </div>
             </div>
         `;
-        mainCon.querySelectorAll("#asset-list").item(0).append(this.createItemList(user));
+        // アイテムリストの表示
+        mainCon.querySelector("#asset-list").append(this.createItemList(user));
+
         document.getElementById("main-page").append(mainCon);
     }
 
