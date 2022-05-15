@@ -6,25 +6,35 @@ export class Controller {
         // Entrance
         View.createEntrancePage();
         // New
-        this.createNewGame();
+        document.getElementById("sign-up-btn").addEventListener("click", () => {
+            this.createNewGame(document.getElementById("entrance-user-name").value);
+        });
         // Login
         // this.continueGame();
     }
 
-    static createNewGame() {
-        document.getElementById("sign-up-btn").addEventListener("click", () => {
-            let user = new User(document.getElementById("user-name").value);
+    static createNewGame(userName) {
+        let user = new User(userName);
+        View.createMainPage(user);
+        let myTimer;
 
-            View.createMainPage(user);
-            // ハンバーガークリック
-            document.getElementById("hamburger").addEventListener("click", () => {
-                user.clickHamburger();
-                document.getElementById("have-burgers").innerHTML = `${user.haveBurgers} Burgers`;
-                document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
-            });
-            
-            this.advanceDate(user);
+        myTimer = setInterval(function(){Controller.advanceDate(user);}, 1000);
+        
+        // ハンバーガークリック
+        document.getElementById("hamburger").addEventListener("click", () => {
+            user.clickHamburger();
+            document.getElementById("have-burgers").innerHTML = `${user.haveBurgers} Burgers`;
+            document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
         });
+
+        // リセット
+        document.getElementById("reset").addEventListener("click", () => {
+            if (window.confirm("Do you really want to reset?")) {
+                clearInterval(myTimer);
+                this.createNewGame(document.getElementById("main-user-name").innerText);
+            }
+        });
+        
     }
 
     // static continueGame(user) {
@@ -33,26 +43,19 @@ export class Controller {
 
     // 日にちを進める
     static advanceDate(user) {
-        setInterval(function(){
-            user.spentDays++;
-            document.getElementById("spent-days").innerHTML = `${user.spentDays} days`;
+        user.spentDays++;
+        document.getElementById("spent-days").innerHTML = `${user.spentDays} days`;
 
-            // userが歳をとる
-            if(user.spentDays % 365 == 0) {
-                user.age++;
-                document.getElementById("user-age").innerHTML = `${user.age} years old`;
-            }
+        // userが歳をとる
+        if(user.spentDays % 365 == 0) {
+            user.age++;
+            document.getElementById("user-age").innerHTML = `${user.age} years old`;
+        }
 
-            // 不動産、金融商品の効果
-            user.haveMoney += user.effectRealEstate + user.effectFinancialProduct;
-            document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
+        // 不動産、金融商品の効果
+        user.haveMoney += user.effectRealEstate + user.effectFinancialProduct;
+        document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
 
-            // リセット
-            // if (window.confirm("Do you really want to reset?")) {
-            //     reset();
-            // }
-
-            // セーブ
-        },1000)
+        // セーブ
     }
 }

@@ -47,8 +47,6 @@ export class User {
 
     clickHamburger() {
         this.haveMoney += this.effectClick;
-        console.log(this.haveMoney);
         this.haveBurgers++;
-        console.log(this.haveBurgers);
     }
 }
