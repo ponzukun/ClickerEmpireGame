@@ -1,9 +1,9 @@
 export class Item {
-    constructor(name, type, effect, maxAmount, description, imageUrl, price) {
+    constructor(name, type, effect, currentAmount, maxAmount, description, imageUrl, price) {
         this.name = name;
         this.type = type;
         this.effect = effect;
-        this.currentAmount = 0;
+        this.currentAmount = currentAmount;
         this.maxAmount = maxAmount;
         this.description = description;
         this.imageUrl = imageUrl;

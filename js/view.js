@@ -7,8 +7,8 @@ export class View {
 
     // このゲームの入り口の画面を作成
     static createEntrancePage() {
-        this.clearPage();
-        
+        View.clearPage();
+
         let EntranceCon = document.createElement("div");
         EntranceCon.classList.add("vh-100", "d-flex", "justify-content-center", "align-items-center", "bg-dark");
         EntranceCon.innerHTML = `
@@ -36,7 +36,7 @@ export class View {
 
     // このゲームのメイン画面を作成
     static createMainPage(user) {
-        this.clearPage();
+        View.clearPage();
 
         let mainCon = document.createElement("div");
         mainCon.classList.add("d-flex", "justify-content-center", "align-items-center", "bg-dark");
@@ -59,7 +59,7 @@ export class View {
                         </div>
                         <div class="d-flex justify-content-between col-12">
                             <div id="spent-days" class="border my-1 mr-1 col-6 rem1">${user.spentDays} days</div>
-                            <div id="have-money" class="border my-1 ml-1 col-6 rem1">￥ ${this.numberWithCommas(user.haveMoney)}</div>
+                            <div id="have-money" class="border my-1 ml-1 col-6 rem1">￥ ${View.numberWithCommas(user.haveMoney)}</div>
                         </div>
                     </div>
                     <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight"></div>
@@ -76,7 +76,7 @@ export class View {
         `;
 
         // アイテムリストの表示
-        mainCon.querySelector("#asset-list").append(this.createItemList(user));
+        mainCon.querySelector("#asset-list").append(View.createItemList(user));
         
         document.getElementById("main-page").append(mainCon);
     }
@@ -95,7 +95,7 @@ export class View {
                     </div>
                     <div class="col-6 d-flex flex-column justify-content-center">
                         <p class="rem1p5">${item.name}</p>
-                        <p class="rem1p5">￥ ${this.numberWithCommas(item.price)}</p>
+                        <p class="rem1p5">￥ ${View.numberWithCommas(item.price)}</p>
                     </div>
                     <div class="col-2 d-flex flex-column justify-content-center">
                         <h3 class="pt-3">${item.currentAmount}</h3>
@@ -106,12 +106,12 @@ export class View {
             // アイテムの購入画面に遷移
             itemCon.addEventListener("click", () => {
                 document.getElementById("asset-list").innerHTML = "";
-                document.getElementById("asset-list").append(this.createItemDetail(item));
+                document.getElementById("asset-list").append(View.createItemDetail(item));
 
                 // 戻る
                 document.getElementById("back-btn").addEventListener("click", () => {
                     document.getElementById("asset-list").innerHTML = "";
-                    document.getElementById("asset-list").append(this.createItemList(user));    
+                    document.getElementById("asset-list").append(View.createItemList(user));    
                 });
 
                 // 購入→所持金より購入金額が下か判定→所持金から購入金額を引く→購入量を増やす
@@ -121,7 +121,7 @@ export class View {
                     if(totalPrice <= user.haveMoney) {
                         user.buyItem(item, itemAmount);
                         document.getElementById("asset-list").innerHTML = "";
-                        document.getElementById("asset-list").append(this.createItemList(user));
+                        document.getElementById("asset-list").append(View.createItemList(user));
                         document.getElementById("effect-click").innerHTML = `one click ￥${user.effectClick}`;
                     } else {
                         window.alert("Too expensive for you!!");
@@ -144,7 +144,7 @@ export class View {
                         <div class="col-12">
                             <h1 class="mb-2">${item.name}</h1>
                             <div class="text-left mb-1 rem1p5">Max purchases: ${item.maxAmount}</div>
-                            <div class="text-left mb-3 rem1p5">Price: ￥${this.numberWithCommas(item.price)}</div>
+                            <div class="text-left mb-3 rem1p5">Price: ￥${View.numberWithCommas(item.price)}</div>
                             <div class="text-left rem1">${item.description}</div>
                         </div>
                     </div>
@@ -158,7 +158,7 @@ export class View {
                         <input id="amount-purchase" class="text-right col-11 px-1" type="number" min="1" value="1">
                     </div>
                     <div>
-                        <div id="total-price" class="col-12 rem1p5 text-right pr-4">Total: ￥${this.numberWithCommas(item.price)}</div>
+                        <div id="total-price" class="col-12 rem1p5 text-right pr-4">Total: ￥${View.numberWithCommas(item.price)}</div>
                     </div>
                 </div>
                 <div class="d-flex my-4">
@@ -174,7 +174,7 @@ export class View {
         // 購入量を変更すると合計価格が変化
         itemDetailCon.querySelector("#amount-purchase").addEventListener("input", (event) => {
             let totalPrice = item.price * event.target.value;
-            itemDetailCon.querySelector("#total-price").innerHTML = `Total: ￥${this.numberWithCommas(totalPrice)}`;
+            itemDetailCon.querySelector("#total-price").innerHTML = `Total: ￥${View.numberWithCommas(totalPrice)}`;
         });
         return itemDetailCon;
     }

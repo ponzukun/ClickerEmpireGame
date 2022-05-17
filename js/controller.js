@@ -3,18 +3,50 @@ import { View } from "/js/view.js";
 
 export class Controller {
     static startGame() {
-        // Entrance
         View.createEntrancePage();
-        // New
+
+        // 新規登録
         document.getElementById("sign-up-btn").addEventListener("click", () => {
-            this.createNewGame(document.getElementById("entrance-user-name").value);
+            let userName = document.getElementById("entrance-user-name").value;
+            let user = new User(userName, 
+                                0, // age
+                                0, // effectClick
+                                0, // effectRealEstate
+                                0, // effectFinancialProduct
+                                0, // haveBugers
+                                0, // haveMoney
+                                0, // spentDays
+                                null); // haveItems
+            Controller.createGame(user);
         });
-        // Login
-        // this.continueGame();
+
+        // ログイン
+        document.getElementById("login-btn").addEventListener("click", () => {
+            let userJsonString = localStorage.getItem(document.getElementById("entrance-user-name").value);
+            if(userJsonString === null) {
+                alert("This user is not saved.");
+            } else {
+                let user = JSON.parse(userJsonString);
+    
+                // user.haveItemsをobjectを含んだarrayに変換
+                let userHaveItems = Object.entries(user.haveItems).map(ele => ele[1]);
+    
+                user = new User(user.name, 
+                                user.age, 
+                                user.effectClick, 
+                                user.effectRealEstate, 
+                                user.effectFinancialProduct, 
+                                user.haveBurgers, 
+                                user.haveMoney, 
+                                user.spentDays, 
+                                userHaveItems);
+
+                Controller.createGame(user);
+            }
+        });
     }
 
-    static createNewGame(userName) {
-        let user = new User(userName);
+    static createGame(user) {
         View.createMainPage(user);
         let myTimer;
 
@@ -44,15 +76,11 @@ export class Controller {
                 // save at localStrage
                 localStorage.setItem(user.name, jsonEncoded);
                 // back to EntrancePage
-                View.createEntrancePage();
+                Controller.startGame();
             }
         });
         
     }
-
-    // static continueGame(user) {
-
-    // }
 
     // 日にちを進める
     static advanceDate(user) {
