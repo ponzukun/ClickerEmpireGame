@@ -2,13 +2,8 @@ import { User } from "/js/user.js";
 import { View } from "/js/view.js";
 
 export class Controller {
-    static startGame() {
-        View.createEntrancePage();
-
-        // 新規登録
-        document.getElementById("sign-up-btn").addEventListener("click", () => {
-            let userName = document.getElementById("entrance-user-name").value;
-            let user = new User(userName, 
+    static createNewUser(userName) {
+        let newUser = new User(userName, 
                                 0, // age
                                 0, // effectClick
                                 0, // effectRealEstate
@@ -17,7 +12,16 @@ export class Controller {
                                 0, // haveMoney
                                 0, // spentDays
                                 null); // haveItems
-            Controller.createGame(user);
+        return newUser;
+    }
+
+    static startGame() {
+        View.createEntrancePage();
+
+        // 新規登録
+        document.getElementById("sign-up-btn").addEventListener("click", () => {
+            let userName = document.getElementById("entrance-user-name").value;
+            Controller.createGame(Controller.createNewUser(userName));
         });
 
         // ログイン
@@ -66,17 +70,8 @@ export class Controller {
         document.getElementById("reset").addEventListener("click", () => {
             if (window.confirm("Do you really want to reset?")) {
                 clearInterval(myTimer);
-                let newUser = new User(document.getElementById("main-user-name").innerText,
-                                        0, // age
-                                        0, // effectClick
-                                        0, // effectRealEstate
-                                        0, // effectFinancialProduct
-                                        0, // haveBugers
-                                        0, // haveMoney
-                                        0, // spentDays
-                                        null); // haveItems
-
-                this.createGame(newUser);
+                let userName = document.getElementById("main-user-name").innerText;
+                this.createGame(Controller.createNewUser(userName));
             }
         });
 
