@@ -34,6 +34,19 @@ export class Controller {
                 this.createNewGame(document.getElementById("main-user-name").innerText);
             }
         });
+
+        // セーブ
+        document.getElementById("save").addEventListener("click", () => {
+            if (window.confirm("Do you really want to save?")) {
+                clearInterval(myTimer);
+                // object -> json string
+                let jsonEncoded = JSON.stringify(user);
+                // save at localStrage
+                localStorage.setItem(user.name, jsonEncoded);
+                // back to EntrancePage
+                View.createEntrancePage();
+            }
+        });
         
     }
 
@@ -55,7 +68,5 @@ export class Controller {
         // 不動産、金融商品の効果
         user.haveMoney += user.effectRealEstate + user.effectFinancialProduct;
         document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
-
-        // セーブ
     }
 }

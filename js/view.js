@@ -1,7 +1,14 @@
 export class View {
 
+    static clearPage() {
+        document.getElementById("entrance-page").innerHTML = "";
+        document.getElementById("main-page").innerHTML = "";
+    }
+
     // このゲームの入り口の画面を作成
     static createEntrancePage() {
+        this.clearPage();
+        
         let EntranceCon = document.createElement("div");
         EntranceCon.classList.add("vh-100", "d-flex", "justify-content-center", "align-items-center", "bg-dark");
         EntranceCon.innerHTML = `
@@ -29,8 +36,7 @@ export class View {
 
     // このゲームのメイン画面を作成
     static createMainPage(user) {
-        document.getElementById("entrance-page").innerHTML = "";
-        document.getElementById("main-page").innerHTML = "";
+        this.clearPage();
 
         let mainCon = document.createElement("div");
         mainCon.classList.add("d-flex", "justify-content-center", "align-items-center", "bg-dark");
@@ -61,7 +67,7 @@ export class View {
                         <div id="reset" class="border border-dark p-2 mr-3 hover">
                             <i class="text-dark fa-3x fas fa-undo"></i>
                         </div>
-                        <div class="border border-dark p-2 hover">
+                        <div id="save" class="border border-dark p-2 hover">
                             <i class="text-dark fa-3x fas fa-save"></i>
                         </div>
                     </div>
