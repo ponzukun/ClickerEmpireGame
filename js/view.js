@@ -40,45 +40,84 @@ export class View {
 
         let mainCon = document.createElement("div");
         mainCon.classList.add("d-flex", "justify-content-center", "align-items-center", "bg-dark");
-        mainCon.innerHTML = `
-            <div class="vh-88 d-block d-flex bg-white col-9 text-center text-white my-5 p-4">
-                <div class="bg-danger mr-2 col-4">
-                    <div class="pt-2">
-                        <p id="have-burgers" class="rem1p5">${user.haveBurgers} Burgers</p>
-                        <p id="effect-click" class="rem1p5">one click ￥${user.effectClick}</p>
-                    </div>
-                    <div id="hamburger">
-                        <img class="img-item hover" src="/images/Hamburger.png">
-                    </div>
-                </div>
-                <div class="ml-2 col-8">
-                    <div class="bg-primary py-2">
-                        <div class="d-flex justify-content-between col-12">
-                            <div id="main-user-name" class="border my-1 mr-1 col-6 rem1">${user.name}</div>
-                            <div id="user-age" class="border my-1 ml-1 col-6 rem1">${user.age} years old</div>
-                        </div>
-                        <div class="d-flex justify-content-between col-12">
-                            <div id="spent-days" class="border my-1 mr-1 col-6 rem1">${user.spentDays} days</div>
-                            <div id="have-money" class="border my-1 ml-1 col-6 rem1">￥ ${View.numberWithCommas(user.haveMoney)}</div>
-                        </div>
-                    </div>
-                    <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight"></div>
-                    <div class="d-flex justify-content-end mt-2">
-                        <div id="reset" class="border border-dark p-2 mr-3 hover">
-                            <i class="text-dark fa-3x fas fa-undo"></i>
-                        </div>
-                        <div id="save" class="border border-dark p-2 hover">
-                            <i class="text-dark fa-3x fas fa-save"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        
+        let mainConChild = document.createElement("div");
+        mainConChild.classList.add("vh-88", "d-block", "d-flex", "bg-white", "col-9", "text-center", "text-white", "my-5", "p-4");
+
+        mainConChild.append(View.createBurgerCon(user));
+        mainConChild.append(View.createMenuCon(user));
+        mainCon.append(mainConChild);
 
         // アイテムリストの表示
         mainCon.querySelector("#asset-list").append(View.createItemList(user));
         
         document.getElementById("main-page").append(mainCon);
+    }
+
+    static createBurgerCon(user) {
+        let burgerCon = document.createElement("div");
+        burgerCon.classList.add("bg-danger", "mr-2", "col-4");
+
+        burgerCon.append(View.createBurgerDetail(user));
+
+        let moneyIcon = document.createElement("div");
+        moneyIcon.setAttribute("id", "money-icon")
+        moneyIcon.append(View.createMoneyIcon());
+        burgerCon.append(moneyIcon);
+        
+        burgerCon.append(View.createBurger());
+        return burgerCon;
+    }
+
+    static createBurgerDetail(user) {
+        let burgerDetail = document.createElement("div");
+        burgerDetail.classList.add("pt-2");
+        burgerDetail.innerHTML = `
+            <p id="have-burgers" class="rem1p5">${user.haveBurgers} Burgers</p>
+            <p id="effect-click" class="rem1p5">one click ￥${user.effectClick}</p>
+        `;
+        return burgerDetail;
+    }
+
+    static createMoneyIcon() {
+        let moneyIcon = document.createElement("div");
+        moneyIcon.classList.add("d-flex", "justify-content-end", "align-items-end");
+        moneyIcon.innerHTML = `<i class="fa-3x fas fa-money-bill-alt money"></i>`;
+        return moneyIcon;
+    }
+    
+    static createBurger() {
+        let burger = document.createElement("div");
+        burger.setAttribute("id","hamburger");
+        burger.innerHTML = `<img class="img-item hover" src="/images/Hamburger.png">`;
+        return burger;
+    }
+
+    static createMenuCon(user) {
+        let menuCon = document.createElement("div");
+        menuCon.classList.add("ml-2", "col-8");
+        menuCon.innerHTML = `
+                <div class="bg-primary py-2">
+                    <div class="d-flex justify-content-between col-12">
+                        <div id="main-user-name" class="border my-1 mr-1 col-6 rem1">${user.name}</div>
+                        <div id="user-age" class="border my-1 ml-1 col-6 rem1">${user.age} years old</div>
+                    </div>
+                    <div class="d-flex justify-content-between col-12">
+                        <div id="spent-days" class="border my-1 mr-1 col-6 rem1">${user.spentDays} days</div>
+                        <div id="have-money" class="border my-1 ml-1 col-6 rem1">￥ ${View.numberWithCommas(user.haveMoney)}</div>
+                    </div>
+                </div>
+                <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight"></div>
+                <div class="d-flex justify-content-end mt-2">
+                    <div id="reset" class="border border-dark p-2 mr-3 hover">
+                        <i class="text-dark fa-3x fas fa-undo"></i>
+                    </div>
+                    <div id="save" class="border border-dark p-2 hover">
+                        <i class="text-dark fa-3x fas fa-save"></i>
+                    </div>
+                </div>
+        `;
+        return menuCon;
     }
 
     // アイテムリストの画面を作成

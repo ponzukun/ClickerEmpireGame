@@ -57,13 +57,26 @@ export class Controller {
             user.clickHamburger();
             document.getElementById("have-burgers").innerHTML = `${user.haveBurgers} Burgers`;
             document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
+            // この流れで良いあとは場所を変えるだけ
+            document.getElementById("money-icon").innerHTML = "";
+            document.getElementById("money-icon").append(View.createMoneyIcon());
         });
 
         // リセット
         document.getElementById("reset").addEventListener("click", () => {
             if (window.confirm("Do you really want to reset?")) {
                 clearInterval(myTimer);
-                this.createNewGame(document.getElementById("main-user-name").innerText);
+                let newUser = new User(document.getElementById("main-user-name").innerText,
+                                        0, // age
+                                        0, // effectClick
+                                        0, // effectRealEstate
+                                        0, // effectFinancialProduct
+                                        0, // haveBugers
+                                        0, // haveMoney
+                                        0, // spentDays
+                                        null); // haveItems
+
+                this.createGame(newUser);
             }
         });
 
