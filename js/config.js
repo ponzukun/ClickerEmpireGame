@@ -1,10 +1,10 @@
 export const items = [
     {
-        "name":"Flip machine",
+        "name":"Grill machine",
         "type":"能力",
         "effect":25,
         "maxAmount":500,
-        "description":"グリルをクリックごとに 25 円を取得します。",
+        "description":"ハンバーガーをクリックごとに 25 円を取得します。",
         "imageUrl":"/images/FlipMachine.png",
         "price":15000
     },

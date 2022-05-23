@@ -10,21 +10,21 @@ export class View {
         View.clearPage();
 
         let EntranceCon = document.createElement("div");
-        EntranceCon.classList.add("vh-100", "d-flex", "justify-content-center", "align-items-center", "bg-dark");
+        EntranceCon.classList.add("vh-100", "d-flex", "justify-content-center", "align-items-center", "color-background");
         EntranceCon.innerHTML = `
         <div class="d-flex justify-content-center align-items-center col-md-7 col-10">
-            <div id="initial-form" class="d-block p-4 bg-white text-center d-flex justify-content-center">
-                <div id="login-form" class="col-12">
+            <div class="d-block p-4 color-main color-text text-center d-flex justify-content-center">
+                <div class="col-12">
                     <h2>Clicker Empire Game</h2>
                     <div class="mt-3 form-group">
-                        <input id="entrance-user-name" type="text" name="userName" class="form-control" placeholder="Your name" value="ponzukun" required>
+                        <input id="entrance-user-name" type="text" name="userName" class="form-control color-text" placeholder="Your name" value="ponzukun" required>
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="pl-0 col-6">
-                            <button id="sign-up-btn" class="col-12 btn btn-primary">New</button>
+                            <button id="sign-up-btn" class="col-12 btn color-button color-text">New</button>
                         </div>
                         <div class="pr-0 col-6">
-                            <button id="login-btn" class="col-12 btn btn-primary">Login</button>
+                            <button id="login-btn" class="col-12 btn color-button color-text">Login</button>
                         </div>
                     </div>
                 </div>
@@ -39,10 +39,10 @@ export class View {
         View.clearPage();
 
         let mainCon = document.createElement("div");
-        mainCon.classList.add("d-flex", "justify-content-center", "align-items-center", "bg-dark");
+        mainCon.classList.add("d-flex", "justify-content-center", "align-items-center", "color-background");
         
         let mainConChild = document.createElement("div");
-        mainConChild.classList.add("vh-88", "d-block", "d-flex", "bg-white", "col-9", "text-center", "text-white", "my-5", "p-4");
+        mainConChild.classList.add("vh-88", "d-block", "d-flex", "color-main", "col-9", "text-center", "color-text", "my-5", "p-4");
 
         mainConChild.append(View.createBurgerCon(user));
         mainConChild.append(View.createMenuCon(user));
@@ -56,7 +56,7 @@ export class View {
 
     static createBurgerCon(user) {
         let burgerCon = document.createElement("div");
-        burgerCon.classList.add("bg-danger", "mr-2", "col-4");
+        burgerCon.classList.add("mr-2", "col-4");
 
         burgerCon.append(View.createBurgerDetail(user));
 
@@ -97,7 +97,7 @@ export class View {
         let menuCon = document.createElement("div");
         menuCon.classList.add("ml-2", "col-8");
         menuCon.innerHTML = `
-                <div class="bg-primary py-2">
+                <div class="py-2">
                     <div class="d-flex justify-content-between col-12">
                         <div id="main-user-name" class="border my-1 mr-1 col-6 rem1">${user.name}</div>
                         <div id="user-age" class="border my-1 ml-1 col-6 rem1">${user.age} years old</div>
@@ -127,7 +127,7 @@ export class View {
 
         user.haveItems.forEach(item => {
             let itemCon = document.createElement("div");
-            itemCon.classList.add("border-dark", "bg-success", "d-flex", "py-2", "mb-2", "hover");
+            itemCon.classList.add("border", "color-main", "d-flex", "py-2", "mb-2", "hover");
             itemCon.innerHTML = `
                     <div class="col-4">
                         <img class="img-item" src="${item.imageUrl}">
@@ -177,7 +177,7 @@ export class View {
         let itemDetailCon = document.createElement("div");
         itemDetailCon.classList.add("px-2", "pt-2");
         itemDetailCon.innerHTML = `
-            <div class="border-dark bg-success py-2">
+            <div class="border color-main py-2">
                 <div class="d-flex mb-4">
                     <div class="col-8">
                         <div class="col-12">
@@ -202,10 +202,10 @@ export class View {
                 </div>
                 <div class="d-flex my-4">
                     <div class="pl-2 col-6">
-                        <button id="back-btn" class="col-12 btn btn-secondary">Go Back</button>
+                        <button id="back-btn" class="col-12 btn color-button-secondary color-text">Go Back</button>
                     </div>
                     <div class="pr-2 col-6">
-                        <button id="purchase-btn" class="col-12 btn btn-danger">Purchase</button>
+                        <button id="purchase-btn" class="col-12 btn color-button color-text">Purchase</button>
                     </div>
                 </div>
             </div>

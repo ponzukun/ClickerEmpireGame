@@ -15,6 +15,24 @@
     height: auto;
     object-fit: cover;
 }
+.color-background {
+    background-color: #fef6e4;
+}
+.color-main {
+    background-color: #f3d2c1;
+}
+.color-button {
+    background-color: #f582ae;
+}
+.color-button-secondary {
+    background-color: #8bd3dd;
+}
+.color-text {
+    color: #001858;
+}
+.border {
+    border: 1px solid #001858!important
+}
 /* effect */
 .hover {
     cursor: pointer;
