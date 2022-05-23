@@ -10,6 +10,10 @@
 - ユーザーは、ゲーム内で以下のアイテムを購入することができます。
 - 秒とはゲーム内での 1 日を指します。
 
+## Reference
+
+- https://taikitkayanagi.github.io/Clicker-Empire-Game/
+
 ## Pages URL
 
 
