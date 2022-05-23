@@ -42,7 +42,7 @@ export const items = [
         "maxAmount":500,
         "description":"毎秒 120 円を取得します。",
         "imageUrl":"/images/IceCreamTruck.png",
-        "price":30000
+        "price":100000
     },
     {
         "name":"House",
