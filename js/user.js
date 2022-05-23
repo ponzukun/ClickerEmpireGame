@@ -2,27 +2,41 @@ import { Item } from "/js/item.js";
 import { items } from "/js/config.js";
 
 export class User {
-    constructor(name, age, effectClick, effectRealEstate, effectFinancialProduct, haveBurgers, haveMoney, spentDays, haveItems) {
+    constructor(name, age, effectClick, effectRealEstate, effectFinancialProduct, haveBurgers, haveMoney, spentDays, haveItems, newUser, rich) {
         this.name = name;
         // 新規登録
-        if(age == 0 && effectClick == 0 && effectRealEstate == 0 
-            && effectFinancialProduct == 0 && haveBurgers == 0 && haveMoney == 0 
-            && haveItems == null) {
-                this.age = 20;
-                this.effectClick = 25;
-                this.effectRealEstate = 0;
-                this.effectFinancialProduct = 0;
-                this.haveBurgers = 0;
-                this.haveMoney = 50000;
-                this.spentDays = 1;
-                this.haveItems = items.map(item => new Item(item.name, 
-                                                            item.type, 
-                                                            item.effect, 
-                                                            0,
-                                                            item.maxAmount, 
-                                                            item.description, 
-                                                            item.imageUrl, 
-                                                            item.price));
+        if(newUser) {
+            this.age = 20;
+            this.effectClick = 25;
+            this.effectRealEstate = 0;
+            this.effectFinancialProduct = 0;
+            this.haveBurgers = 0;
+            this.haveMoney = 50000;
+            this.spentDays = 1;
+            this.haveItems = items.map(item => new Item(item.name, 
+                                                        item.type, 
+                                                        item.effect, 
+                                                        0,
+                                                        item.maxAmount, 
+                                                        item.description, 
+                                                        item.imageUrl, 
+                                                        item.price));
+        } else if(name == "rich") {
+            this.age = 50;
+            this.effectClick = 1000;
+            this.effectRealEstate = 0;
+            this.effectFinancialProduct = 0;
+            this.haveBurgers = 0;
+            this.haveMoney = 10000000000;
+            this.spentDays = 1;
+            this.haveItems = items.map(item => new Item(item.name, 
+                                                        item.type, 
+                                                        item.effect, 
+                                                        0,
+                                                        item.maxAmount, 
+                                                        item.description, 
+                                                        item.imageUrl, 
+                                                        item.price));
         } else {
             // ログイン
             this.age = age;

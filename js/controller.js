@@ -11,8 +11,27 @@ export class Controller {
                                 0, // haveBugers
                                 0, // haveMoney
                                 0, // spentDays
-                                null); // haveItems
+                                null, // haveItems
+                                true); // newUser
         return newUser;
+    }
+
+    static createRich() {
+        let newUser = new User("rich", 
+                                0, // age
+                                0, // effectClick
+                                0, // effectRealEstate
+                                0, // effectFinancialProduct
+                                0, // haveBugers
+                                0, // haveMoney
+                                0, // spentDays
+                                null, // haveItems
+                                false); // newUser
+        // object -> json string
+        let jsonEncoded = JSON.stringify(newUser);
+        // save at localStrage
+        localStorage.setItem(newUser.name, jsonEncoded);
+        
     }
 
     static startGame() {
@@ -43,7 +62,8 @@ export class Controller {
                                 user.haveBurgers, 
                                 user.haveMoney, 
                                 user.spentDays, 
-                                userHaveItems);
+                                userHaveItems,
+                                false);
 
                 Controller.createGame(user);
             }
