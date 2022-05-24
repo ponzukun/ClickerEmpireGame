@@ -62,16 +62,14 @@ export class User {
             effect *= item.price;
             if(effect - this.effectFinancialProduct < 0) {
                 this.effectFinancialProduct += -1 * (effect - this.effectFinancialProduct);
-            }
-            else {
+            } else {
                 this.effectFinancialProduct += effect;
             }
         }
         else if(item.type == "不動産") {
             if(effect - this.effectRealEstate < 0) {
                 this.effectRealEstate += -1 * (effect - this.effectRealEstate);
-            }
-            else {
+            } else {
                 this.effectRealEstate += effect;
             }
         }
