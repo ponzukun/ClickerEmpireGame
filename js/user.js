@@ -2,32 +2,16 @@ import { Item } from "/js/item.js";
 import { items } from "/js/config.js";
 
 export class User {
-    constructor(name, age, effectClick, effectRealEstate, effectFinancialProduct, haveBurgers, haveMoney, spentDays, haveItems, newUser, rich) {
+    constructor(newUser, name, age, haveMoney, effectClick, effectRealEstate, effectFinancialProduct, haveBurgers, spentDays, haveItems) {
         this.name = name;
         // 新規登録
         if(newUser) {
             this.age = 20;
+            this.haveMoney = 50000;
             this.effectClick = 25;
             this.effectRealEstate = 0;
             this.effectFinancialProduct = 0;
             this.haveBurgers = 0;
-            this.haveMoney = 50000;
-            this.spentDays = 1;
-            this.haveItems = items.map(item => new Item(item.name, 
-                                                        item.type, 
-                                                        item.effect, 
-                                                        0,
-                                                        item.maxAmount, 
-                                                        item.description, 
-                                                        item.imageUrl, 
-                                                        item.price));
-        } else if(name == "rich") {
-            this.age = 50;
-            this.effectClick = 1000;
-            this.effectRealEstate = 0;
-            this.effectFinancialProduct = 0;
-            this.haveBurgers = 0;
-            this.haveMoney = 10000000000;
             this.spentDays = 1;
             this.haveItems = items.map(item => new Item(item.name, 
                                                         item.type, 
@@ -40,11 +24,11 @@ export class User {
         } else {
             // ログイン
             this.age = age;
+            this.haveMoney = haveMoney;
             this.effectClick = effectClick;
             this.effectRealEstate = effectRealEstate;
             this.effectFinancialProduct = effectFinancialProduct;
             this.haveBurgers = haveBurgers;
-            this.haveMoney = haveMoney;
             this.spentDays = spentDays;
             this.haveItems = haveItems.map(item => new Item(item.name, 
                                                             item.type, 
@@ -54,6 +38,13 @@ export class User {
                                                             item.description, 
                                                             item.imageUrl, 
                                                             item.price));
+        }
+
+        // rich mode
+        if(name == "rich") {
+            this.age = 50;
+            this.haveMoney = 10000000000;
+            this.effectClick = 10;
         }
     }
 

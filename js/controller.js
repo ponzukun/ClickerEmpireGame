@@ -3,30 +3,12 @@ import { View } from "/js/view.js";
 
 export class Controller {
     static createNewUser(userName) {
-        let newUser = new User(userName, 
-                                0, // age
-                                0, // effectClick
-                                0, // effectRealEstate
-                                0, // effectFinancialProduct
-                                0, // haveBugers
-                                0, // haveMoney
-                                0, // spentDays
-                                null, // haveItems
-                                true); // newUser
+        let newUser = new User(true, userName);
         return newUser;
     }
 
     static createRich() {
-        let newUser = new User("rich", 
-                                0, // age
-                                0, // effectClick
-                                0, // effectRealEstate
-                                0, // effectFinancialProduct
-                                0, // haveBugers
-                                0, // haveMoney
-                                0, // spentDays
-                                null, // haveItems
-                                false); // newUser
+        let newUser = new User(true, "rich");
         // object -> json string
         let jsonEncoded = JSON.stringify(newUser);
         // save at localStrage
@@ -54,16 +36,16 @@ export class Controller {
                 // user.haveItemsをobjectを含んだarrayに変換
                 let userHaveItems = Object.entries(user.haveItems).map(ele => ele[1]);
     
-                user = new User(user.name, 
+                user = new User(false,
+                                user.name, 
                                 user.age, 
+                                user.haveMoney, 
                                 user.effectClick, 
                                 user.effectRealEstate, 
                                 user.effectFinancialProduct, 
                                 user.haveBurgers, 
-                                user.haveMoney, 
                                 user.spentDays, 
-                                userHaveItems,
-                                false);
+                                userHaveItems);
 
                 Controller.createGame(user);
             }
@@ -77,14 +59,23 @@ export class Controller {
         myTimer = setInterval(function(){Controller.advanceDate(user);}, 1000);
         
         // ハンバーガークリック
-        document.getElementById("hamburger").addEventListener("click", () => {
+        let burger = document.getElementById("hamburger");
+        burger.addEventListener("click", () => {
             user.clickHamburger();
             document.getElementById("have-burgers").innerHTML = `${user.haveBurgers} Burgers`;
             document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
-            // この流れで良いあとは場所を変えるだけ
             document.getElementById("money-icon").innerHTML = "";
             document.getElementById("money-icon").append(View.createMoneyIcon());
         });
+        burger.addEventListener("mousedown", () => {
+            burger.classList.add("burger-jump");
+        })
+        burger.addEventListener("animationend", ()=>{
+            burger.classList.remove("burger-jump");
+        })
+        burger.addEventListener("animationcancel", () => {
+            burger.classList.remove("burger-jump");
+        })
 
         // リセット
         document.getElementById("reset").addEventListener("click", () => {

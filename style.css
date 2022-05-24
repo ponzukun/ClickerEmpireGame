@@ -45,7 +45,14 @@
 .money {
     animation: moneyFadeOut 1s linear forwards;
 }
-
+.burger-jump{
+    animation: 0.08s cubic-bezier(0.01, 0.8, 0.1, 1) 0s 0.5 jump;
+}
+  
+.burger-rotate{
+    animation: rotate 1s linear 2;
+}
+  
 @keyframes moneyFadeOut {
     from {
         transform: translateY(40px);
@@ -56,3 +63,17 @@
         transform: translateY(0);
     }
 }    
+  
+@keyframes rotate {
+    0% {
+        transform:rotateY(0deg);
+    }
+    100%{
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes jump {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
