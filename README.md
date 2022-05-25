@@ -18,7 +18,7 @@
 - https://github.com/fumi7649/Clicker-Empire-Game
 
 ## Pages URL
-
+- https://ponzukun.github.io/ClickerEmpireGame/
 
 ## Usage
 - まず、ユーザ名を入力して、Newを押すと新しいゲームがスタートします。
