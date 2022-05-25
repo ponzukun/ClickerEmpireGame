@@ -10,13 +10,6 @@
 - ユーザーは、ゲーム内で以下のアイテムを購入することができます。
 - 秒とはゲーム内での 1 日を指します。
 
-## Reference
-
-- https://taikitkayanagi.github.io/Clicker-Empire-Game/
-- https://hirotada-t.github.io/ClickerEmpireGame/
-- https://github.com/y0uk1/Clicker-Empire-Game
-- https://github.com/fumi7649/Clicker-Empire-Game
-
 ## Pages URL
 - https://ponzukun.github.io/ClickerEmpireGame/
 
@@ -28,6 +21,13 @@
 - 保存されたユーザー名でLoginを押すとゲームの続きができます。
 - 保存されたユーザー名でNewを押すと、セーブを押さない限りユーザーデータは消去されませんが、新しくゲームがスタートします。（間違えた場合はセーブをせず、画面をリロードしてください）
 - rankingを押すと持っているお金順にソートされたユーザーランキングが表示されます。（資産は含まれず、キャッシュのみになります）
+
+## Reference
+
+- https://taikitkayanagi.github.io/Clicker-Empire-Game/
+- https://hirotada-t.github.io/ClickerEmpireGame/
+- https://github.com/y0uk1/Clicker-Empire-Game
+- https://github.com/fumi7649/Clicker-Empire-Game
 
 ## Author
 
