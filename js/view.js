@@ -93,22 +93,22 @@ export class View {
         menuCon.innerHTML = `
                 <div class="p-1 mb-2 bg-dark">
                     <div class="d-flex flex-row justify-content-center flex-wrap color-text color-main">
-                        <div class="col-6 border p-2">
+                        <div class="col-6 border p-2 rem1">
                             <div id="main-user-name">${user.name}</div>
                         </div>
-                        <div class="col-6 border p-2">
+                        <div class="col-6 border p-2 rem1">
                             <div id="user-age">${user.age} years old</div>
                         </div>
-                        <div class="col-6 border p-2">
+                        <div class="col-6 border p-2 rem1">
                             <div id="spent-days">${user.spentDays} days</div>
                         </div>
-                        <div class="col-6 border p-2">
+                        <div class="col-6 border p-2 rem1">
                             <div id="have-money">￥ ${View.numberWithCommas(user.haveMoney)}</div>
                         </div>
                     </div>
                 </div>
                 <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight"></div>
-                <div class="d-flex justify-content-end mt-2">
+                <div class="d-flex justify-content-end mt-2 rem0p5">
                     <div id="reset" class="border p-2 mr-3 hover">
                         <i class="text-dark fa-3x fas fa-undo"></i>
                     </div>
@@ -194,7 +194,7 @@ export class View {
                 <div class="my-1">
                     <h4>How many would you like to purchase?</h4>
                     <div>
-                        <input id="amount-purchase" class="text-right col-11 px-1" type="number" min="1" value="1">
+                        <input id="amount-purchase" class="rem1 text-right col-11 px-1" type="number" min="1" value="1">
                     </div>
                     <div>
                         <div id="total-price" class="col-12 rem1p5 text-right pr-4">Total: ￥${View.numberWithCommas(item.price)}</div>

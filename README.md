@@ -13,6 +13,8 @@
 ## Reference
 
 - https://taikitkayanagi.github.io/Clicker-Empire-Game/
+- https://github.com/y0uk1/Clicker-Empire-Game
+- https://github.com/fumi7649/Clicker-Empire-Game
 
 ## Pages URL
 

@@ -4,6 +4,9 @@
 .vh-88 {
     height: 88vh;
 }
+.rem0p5 {
+    font-size: 0.5rem;
+}
 .rem1 {
     font-size: 1rem;
 }
@@ -89,5 +92,10 @@
 @media (min-width: 992px) {
     .img-burger {
         width: 60%;
+    }
+}
+@media (max-width: 576px) {
+    body {
+        font-size: 0;
     }
 }
