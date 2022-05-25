@@ -40,7 +40,7 @@ export class User {
                                                             item.price));
         }
 
-        // rich mode
+        // richモード
         if(name == "rich") {
             this.age = 50;
             this.haveMoney = 10000000000;

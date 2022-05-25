@@ -1,5 +1,5 @@
 .flowHeight {
-    height: 74%;
+    height: 330px;
 }
 .vh-88 {
     height: 88vh;
@@ -15,8 +15,16 @@
     height: auto;
     object-fit: cover;
 }
+.img-burger {
+    width: 20%;
+    height: auto;
+    object-fit: cover;
+}
 .color-background {
     background-color: #fef6e4;
+}
+.color-background-secondary {
+    background-color: #001858;
 }
 .color-main {
     background-color: #f3d2c1;
@@ -31,7 +39,7 @@
     color: #001858;
 }
 .border {
-    border: 1px solid #001858!important
+    border: 2px solid #001858!important
 }
 /* effect */
 .hover {
@@ -76,4 +84,10 @@
 @keyframes jump {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
+}
+
+@media (min-width: 992px) {
+    .img-burger {
+        width: 60%;
+    }
 }

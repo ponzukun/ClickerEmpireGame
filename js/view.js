@@ -10,10 +10,8 @@ export class View {
         View.clearPage();
 
         let EntranceCon = document.createElement("div");
-        EntranceCon.classList.add("vh-100", "d-flex", "justify-content-center", "align-items-center", "color-background");
+        EntranceCon.classList.add("p-4", "color-main", "color-text", "text-center", "d-flex", "justify-content-center");
         EntranceCon.innerHTML = `
-        <div class="d-flex justify-content-center align-items-center col-md-7 col-10">
-            <div class="d-block p-4 color-main color-text text-center d-flex justify-content-center">
                 <div class="col-12">
                     <h2>Clicker Empire Game</h2>
                     <div class="mt-3 form-group">
@@ -28,8 +26,6 @@ export class View {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div> 
         `;
         document.getElementById("entrance-page").append(EntranceCon);
     }
@@ -39,14 +35,10 @@ export class View {
         View.clearPage();
 
         let mainCon = document.createElement("div");
-        mainCon.classList.add("d-flex", "justify-content-center", "align-items-center", "color-background");
+        mainCon.classList.add("row");
         
-        let mainConChild = document.createElement("div");
-        mainConChild.classList.add("vh-88", "d-block", "d-flex", "color-main", "col-9", "text-center", "color-text", "my-5", "p-4");
-
-        mainConChild.append(View.createBurgerCon(user));
-        mainConChild.append(View.createMenuCon(user));
-        mainCon.append(mainConChild);
+        mainCon.append(View.createBurgerCon(user));
+        mainCon.append(View.createMenuCon(user));
 
         // アイテムリストの表示
         mainCon.querySelector("#asset-list").append(View.createItemList(user));
@@ -56,8 +48,7 @@ export class View {
 
     static createBurgerCon(user) {
         let burgerCon = document.createElement("div");
-        burgerCon.classList.add("mr-2", "col-4");
-
+        burgerCon.classList.add("color-main", "col-md-4", "justify-content-center", "text-center", "p-2", "pb-0", "pb-md-2");
         burgerCon.append(View.createBurgerDetail(user));
 
         let moneyIcon = document.createElement("div");
@@ -71,48 +62,57 @@ export class View {
 
     static createBurgerDetail(user) {
         let burgerDetail = document.createElement("div");
-        burgerDetail.classList.add("pt-2");
+        burgerDetail.classList.add("bg-dark", "px-3", "py-2");
         burgerDetail.innerHTML = `
-            <p id="have-burgers" class="rem1p5">${user.haveBurgers} Burgers</p>
-            <p id="effect-click" class="rem1p5">one click ￥${user.effectClick}</p>
+            <div class="d-flex flex-column justify-content-center align-items-center color-main">
+                <div id="have-burgers" class="rem1p5">${user.haveBurgers} Burgers</div>
+                <div id="effect-click" class="rem1">one click ￥${user.effectClick}</div>
+            </div>
         `;
         return burgerDetail;
     }
 
     static createMoneyIcon() {
         let moneyIcon = document.createElement("div");
-        moneyIcon.classList.add("d-flex", "justify-content-end", "align-items-end");
-        moneyIcon.innerHTML = `<i class="fa-3x fas fa-money-bill-alt money"></i>`;
+        moneyIcon.classList.add("col-8", "col-md-10", "d-flex", "justify-content-end", "align-items-end");
+        moneyIcon.innerHTML = `<i class="fa-2x fa-md-3x fas fa-money-bill-alt money"></i>`;
         return moneyIcon;
     }
     
     static createBurger() {
         let burger = document.createElement("div");
         burger.setAttribute("id","hamburger");
-        burger.innerHTML = `<img id="hamburger-img" class="img-item hover" src="/images/Hamburger.png">`;
+        burger.classList.add("d-flex", "flex-column", "justify-content-center", "align-items-center", "color-main")
+        burger.innerHTML = `<img id="hamburger-img" class="img-burger hover" src="/images/Hamburger.png">`;
         return burger;
     }
 
     static createMenuCon(user) {
         let menuCon = document.createElement("div");
-        menuCon.classList.add("ml-2", "col-8");
+        menuCon.classList.add("p-2", "col-md-8", "justify-content-center", "text-center", "color-main");
         menuCon.innerHTML = `
-                <div class="py-2">
-                    <div class="d-flex justify-content-between col-12">
-                        <div id="main-user-name" class="border my-1 mr-1 col-6 rem1">${user.name}</div>
-                        <div id="user-age" class="border my-1 ml-1 col-6 rem1">${user.age} years old</div>
-                    </div>
-                    <div class="d-flex justify-content-between col-12">
-                        <div id="spent-days" class="border my-1 mr-1 col-6 rem1">${user.spentDays} days</div>
-                        <div id="have-money" class="border my-1 ml-1 col-6 rem1">￥ ${View.numberWithCommas(user.haveMoney)}</div>
+                <div class="p-1 mb-2 bg-dark">
+                    <div class="d-flex flex-row justify-content-center flex-wrap color-text color-main">
+                        <div class="col-6 border p-2">
+                            <div id="main-user-name">${user.name}</div>
+                        </div>
+                        <div class="col-6 border p-2">
+                            <div id="user-age">${user.age} years old</div>
+                        </div>
+                        <div class="col-6 border p-2">
+                            <div id="spent-days">${user.spentDays} days</div>
+                        </div>
+                        <div class="col-6 border p-2">
+                            <div id="have-money">￥ ${View.numberWithCommas(user.haveMoney)}</div>
+                        </div>
                     </div>
                 </div>
                 <div id="asset-list" class="mt-4 bg-dark overflow-auto flowHeight"></div>
                 <div class="d-flex justify-content-end mt-2">
-                    <div id="reset" class="border border-dark p-2 mr-3 hover">
+                    <div id="reset" class="border p-2 mr-3 hover">
                         <i class="text-dark fa-3x fas fa-undo"></i>
                     </div>
-                    <div id="save" class="border border-dark p-2 hover">
+                    <div id="save" class="border p-2 hover">
                         <i class="text-dark fa-3x fas fa-save"></i>
                     </div>
                 </div>
@@ -178,21 +178,21 @@ export class View {
         itemDetailCon.classList.add("px-2", "pt-2");
         itemDetailCon.innerHTML = `
             <div class="border color-main py-2">
-                <div class="d-flex mb-4">
+                <div class="d-flex mb-1">
                     <div class="col-8">
                         <div class="col-12">
-                            <h1 class="mb-2">${item.name}</h1>
-                            <div class="text-left mb-1 rem1p5">Max purchases: ${item.maxAmount}</div>
-                            <div class="text-left mb-3 rem1p5">Price: ￥${View.numberWithCommas(item.price)}</div>
-                            <div class="text-left rem1">${item.description}</div>
+                            <h3 class="mb-1">${item.name}</h3>
+                            <div class="text-left mb-1">Max purchases: ${item.maxAmount}</div>
+                            <div class="text-left mb-1">Price: ￥${View.numberWithCommas(item.price)}</div>
+                            <div class="text-left">${item.description}</div>
                         </div>
                     </div>
                     <div class="col-4">
                         <img class="col-12" src="${item.imageUrl}">
                     </div>
                 </div>
-                <div class="my-4">
-                    <h2>How many would you like to purchase?</h2>
+                <div class="my-1">
+                    <h4>How many would you like to purchase?</h4>
                     <div>
                         <input id="amount-purchase" class="text-right col-11 px-1" type="number" min="1" value="1">
                     </div>
@@ -200,7 +200,7 @@ export class View {
                         <div id="total-price" class="col-12 rem1p5 text-right pr-4">Total: ￥${View.numberWithCommas(item.price)}</div>
                     </div>
                 </div>
-                <div class="d-flex my-4">
+                <div class="d-flex my-1">
                     <div class="pl-2 col-6">
                         <button id="back-btn" class="col-12 btn color-button-secondary color-text">Go Back</button>
                     </div>
