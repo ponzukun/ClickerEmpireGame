@@ -249,7 +249,7 @@ export class View {
                         <p class="col-2 py-3 mb-0">${rank}</p>
                         <p class="col-3 py-3 mb-0">${user.name}</p>
                         <p class="col-3 py-3 mb-0">${user.age}</p>
-                        <p class="col-4 py-3 mb-0">${View.numberWithCommas(user.haveMoney)}</p>
+                        <p class="col-4 py-3 mb-0">￥${View.numberWithCommas(user.haveMoney)}</p>
                     </div>
             `;
             rank++;
