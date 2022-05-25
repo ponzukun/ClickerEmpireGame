@@ -89,7 +89,7 @@ export class View {
         let burger = document.createElement("div");
         burger.setAttribute("id","hamburger");
         burger.classList.add("d-flex", "flex-column", "justify-content-center", "align-items-center", "color-main")
-        burger.innerHTML = `<img id="hamburger-img" class="img-burger hover" src="/images/Hamburger.png">`;
+        burger.innerHTML = `<img id="hamburger-img" class="img-burger hover" src="images/Hamburger.png">`;
         return burger;
     }
 
