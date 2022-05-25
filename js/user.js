@@ -1,5 +1,5 @@
-import { Item } from "/js/item.js";
-import { items } from "/js/config.js";
+import { Item } from "./item.js";
+import { items } from "./config.js";
 
 export class User {
     constructor(newUser, name, age, haveMoney, effectClick, effectRealEstate, effectFinancialProduct, haveBurgers, spentDays, haveItems) {

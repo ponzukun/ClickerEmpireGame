@@ -1,4 +1,4 @@
-import { Controller } from "/js/controller.js";
+import { Controller } from "./controller.js";
 
 Controller.createRich()
 Controller.startGame()

@@ -1,5 +1,5 @@
-import { User } from "/js/user.js";
-import { View } from "/js/view.js";
+import { User } from "./user.js";
+import { View } from "./view.js";
 
 export class Controller {
     static createNewUser(userName) {
