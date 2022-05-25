@@ -3,6 +3,7 @@ export class View {
     static clearPage() {
         document.getElementById("entrance-page").innerHTML = "";
         document.getElementById("main-page").innerHTML = "";
+        document.getElementById("ranking-page").innerHTML = "";
     }
 
     // このゲームの入り口の画面を作成
@@ -23,6 +24,11 @@ export class View {
                         </div>
                         <div class="pr-0 col-6">
                             <button id="login-btn" class="col-12 btn color-button color-text">Login</button>
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-center">
+                        <div class="col-6">
+                            <button id="ranking-btn" class="col-12 btn color-button-secondary color-text">Ranking</button>
                         </div>
                     </div>
                 </div>
@@ -216,6 +222,50 @@ export class View {
             itemDetailCon.querySelector("#total-price").innerHTML = `Total: ￥${View.numberWithCommas(totalPrice)}`;
         });
         return itemDetailCon;
+    }
+
+    static createRankingPage(users) {
+        View.clearPage();
+
+        let rankingCon = document.createElement("div");
+        rankingCon.classList.add("col-12", "color-main");
+
+        let rankingTitle = document.createElement("div");
+        rankingTitle.classList.add("color-text", "d-flex", "text-center");
+        rankingTitle.innerHTML = `
+            <h3 class="col-2 py-3 mb-0"></h3>
+            <h3 class="col-3 py-3 mb-0">Name</h3>
+            <h3 class="col-3 py-3 mb-0">Age</h3>
+            <h3 class="col-4 py-3 mb-0">Cache</h3>
+        `;
+        rankingCon.append(rankingTitle);
+
+        let rankingList = document.createElement("div");
+        rankingList.classList.add("color-background", "mt-2", "p-1", "overflow-auto", "flowHeight");
+        let rank = 1;
+        users.forEach(user => {
+            rankingList.innerHTML += `
+                    <div class="color-text border-bottom row align-items-center m-1 text-center">
+                        <p class="col-2 py-3 mb-0">${rank}</p>
+                        <p class="col-3 py-3 mb-0">${user.name}</p>
+                        <p class="col-3 py-3 mb-0">${user.age}</p>
+                        <p class="col-4 py-3 mb-0">${View.numberWithCommas(user.haveMoney)}</p>
+                    </div>
+            `;
+            rank++;
+        });
+        rankingCon.append(rankingList);
+
+        let rankingButton = document.createElement("div");
+        rankingButton.classList.add("row", "justify-content-center", "py-3");
+        rankingButton.innerHTML = `
+            <div class="col-6">
+                <button id="ranking-back-btn" class="col-12 btn color-button-secondary color-text">Go Back</button>
+            </div>
+        `;
+        rankingCon.append(rankingButton);
+
+        document.getElementById("ranking-page").append(rankingCon);
     }
 
     // 数字にコンマを入れる

@@ -31,6 +31,7 @@ export class Controller {
             if(userJsonString === null) {
                 alert("This user is not saved.");
             } else {
+                // json string -> object
                 let user = JSON.parse(userJsonString);
     
                 // user.haveItemsをobjectを含んだarrayに変換
@@ -49,6 +50,11 @@ export class Controller {
 
                 Controller.createGame(user);
             }
+        });
+
+        // ランキング
+        document.getElementById("ranking-btn").addEventListener("click", () => {
+            Controller.createRanking();
         });
     }
 
@@ -101,6 +107,17 @@ export class Controller {
         
     }
 
+    static createRanking() {
+        let users = Controller.sortUser(Controller.getAllStorage());
+
+        View.createRankingPage(users);
+
+        document.getElementById("ranking-back-btn").addEventListener("click", () => {
+            Controller.startGame();
+        })
+    }
+
+
     // 日にちを進める
     static advanceDate(user) {
         user.spentDays++;
@@ -115,5 +132,23 @@ export class Controller {
         // 不動産、金融商品の効果
         user.haveMoney += user.effectRealEstate + user.effectFinancialProduct;
         document.getElementById("have-money").innerHTML = `￥ ${View.numberWithCommas(user.haveMoney)}`;
+    }
+
+    static getAllStorage() {
+        let values = [],
+            keys = Object.keys(localStorage),
+            i = keys.length;
+    
+        while ( i-- ) {
+            values.push( JSON.parse(localStorage.getItem(keys[i])) );
+        }
+    
+        return values;
+    }
+
+    static sortUser(users) {
+        const sortedAllUser = [...users];
+        sortedAllUser.sort(function (a, b) { return b.haveMoney > a.haveMoney ? 1 : -1 });
+        return sortedAllUser
     }
 }

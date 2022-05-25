@@ -1,9 +1,6 @@
 .flowHeight {
     height: 330px;
 }
-.vh-88 {
-    height: 88vh;
-}
 .rem0p5 {
     font-size: 0.5rem;
 }
@@ -43,6 +40,9 @@
 }
 .border {
     border: 2px solid #001858!important
+}
+.border-bottom {
+    border-bottom: 2px solid #001858!important
 }
 /* effect */
 .hover {
